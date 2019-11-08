@@ -43,6 +43,21 @@ class AccountTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $account = new Account();
-        $account->withdraw(100);
+        $account->withdraw(200);
+    }
+
+    public function testInitialLimitShouldBeEqualsToOneHundread()
+    {
+        $account = new Account();
+        $this->assertEquals(100, $account->getCurrentLimit());
+    }
+
+    public function testWhenWithdrawIsGreaterThanCurrentBalanceShouldDiscountFromLimit()
+    {
+        $account = new Account();
+        $account->withdraw(50);
+
+        $this->assertEquals(-50, $account->getCurrentBalance());
+        $this->assertEquals(50, $account->getCurrentLimit());
     }
 }
