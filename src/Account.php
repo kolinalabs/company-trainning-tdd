@@ -37,8 +37,11 @@ class Account
             throw new \Exception();
         }
 
+        if ($amount > $this->currentBalance) {
+            $this->currentLimit = $this->currentLimit - ($amount - $this->currentBalance);
+        }
+
         $this->currentBalance -= $amount;
-        $this->currentLimit -= $amount;
     }
 
     private function totalAmountFromAccount()

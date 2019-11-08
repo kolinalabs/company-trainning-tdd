@@ -36,7 +36,6 @@ class AccountTest extends TestCase
         $account->withdraw(400);
 
         $this->assertEquals(100, $account->getCurrentBalance());
-
     }
 
     public function testWithdrawWhenAmountGreaterCurrentBalanceShouldThrowAnException()
@@ -59,5 +58,16 @@ class AccountTest extends TestCase
 
         $this->assertEquals(-50, $account->getCurrentBalance());
         $this->assertEquals(50, $account->getCurrentLimit());
+    }
+
+    public function testShouldDiscountFromLimitOnlyTheValueThatLeftOfCurrentBalance()
+    {
+        $account = new Account();
+        $account->deposit(20);
+
+        $account->withdraw(70);
+
+        $this->assertEquals(50, $account->getCurrentLimit());
+        $this->assertEquals(-50, $account->getCurrentBalance());
     }
 }
