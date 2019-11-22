@@ -15,5 +15,9 @@
         "psr-4": {
             "Bank\\": "src"
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --testdox --color",
+        "lint": "./vendor/bin/grumphp run"
     }
 }
